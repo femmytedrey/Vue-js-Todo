@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <p class="display-3">Vue Crash Course</p>
+        <p class="display-3">Vue Todo List</p>
       </div>
     </div>
-    <div class="row">
-      <p>Add create form</p>
+    <div class="row pb-4">
+      <NewTodo @on-addTodo="addTodo($event)" />
     </div>
     <div class="row">
       <div class="col-12 col-lg-6">
@@ -16,6 +16,9 @@
             :key="index"
             :todoString="todo.todoString"
             :completed="todo.completed"
+            @on-delete="deleteTodo(todo)"
+            @on-toggle="toggleTodo(todo)"
+            @on-edit="editTodo(todo, $event)"
           />
         </ul>
       </div>
@@ -25,9 +28,11 @@
 
 <script>
 import TodoSingle from "./TodoSingle.vue";
+import NewTodo from './NewTodo.vue'
 export default {
   components: {
     TodoSingle,
+    NewTodo
   },
   data() {
     return {
@@ -53,7 +58,7 @@ export default {
       todo.todoString = newTodoString;
     },
     deleteTodo(deleteTodo) {
-      this.todo = this.todos.filter(
+      this.todos = this.todos.filter(
         (todo) => todo.todoString !== deleteTodo.todoString
       );
     },
