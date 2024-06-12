@@ -2,6 +2,7 @@
   <li class="d-flex align-items-center list-group-item gap-2">
     <button
       v-if="!isEditing"
+      @dblclick="startEditing()"
       :class="{ 'text-decoration-line-through': completed }"
       @click="$emit('on-toggle')"
       class="btn border-0 text-left flex-grow-1"
